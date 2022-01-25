@@ -57,16 +57,15 @@ public class ArraysAndArrayLists {
         char[][] board = {{' ', ' ', ' '},
         {' ', ' ', ' '},
         {' ', ' ', ' '}};
-        printBoard(board);
+
 //        board[1][1] = 'X';
 //        printBoard(board);
 //        board[0][0] = 'O';
 //        printBoard(board);
-
         char currentPlayer = 'X';
 
         while (!gameOver(board)) {
-
+            printBoard(board);
             int row = -1;
             int column = -1;
 
@@ -87,6 +86,8 @@ public class ArraysAndArrayLists {
             }
 
         }
+        System.out.println("Game over!");
+        printBoard(board);
 
         ArrayList<ArrayList<Character>> board2 = new ArrayList<>();
         board2.add(new ArrayList<Character>()); // row 0
@@ -103,8 +104,9 @@ public class ArraysAndArrayLists {
     }
 
     private static boolean invalidRowOrColumn(int row, int column, char[][] board) {
-        // TODO check if row and column are valid ( 0-2 ), and the location is not empty
-        return false;
+        return (row < 0 || row > 2 || column < 0 || column > 2
+                || board[row][column] != ' ');
+
     }
 
     public static boolean gameOver(char[][] board) {
@@ -112,9 +114,14 @@ public class ArraysAndArrayLists {
     }
 
     public static boolean tieGame(char[][] board) {
-        // TODO check if all the spaces are full - or none are empty
-
-        return false;
+        for (char[] row : board) {
+            for (char space : row) {
+                if (space == ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static boolean playerWins(char[][] board) {
@@ -124,31 +131,39 @@ public class ArraysAndArrayLists {
     }
 
     private static boolean playerWinsVertically(char[][] board) {
-        // TODO        
-        // check each column, see if all 3 are not empty and match
+        for (int columnIndex = 0; columnIndex < 3; columnIndex++) {
+            if (board[0][columnIndex] != ' '
+                    && board[0][columnIndex] == board[1][columnIndex]
+                    && board[0][columnIndex] == board[2][columnIndex]) {
+                return true;
+            }
+        }
         return false;
     }
 
     private static boolean playerWinsHorizontally(char[][] board) {
-        // TODO        
-        // check each row, see if all 3 are not empty and match
+        for (int rowIndex = 0; rowIndex < 3; rowIndex++) {
+            if (board[rowIndex][0] != ' '
+                    && board[rowIndex][0] == board[rowIndex][1]
+                    && board[rowIndex][0] == board[rowIndex][2]) {
+                return true;
+            }
+        }
         return false;
     }
 
     private static boolean playerWinsDiagonally(char[][] board) {
-        return playerWinsDiagonallyUp(board) || playerWinsDiagonallyDown(boad);
+        return playerWinsDiagonallyUp(board) || playerWinsDiagonallyDown(board);
     }
 
     private static boolean playerWinsDiagonallyUp(char[][] board) {
-        // TODO
-        // check three locations, if they are not empty and match, someone won
-        return false;
+        return board[2][0] != ' ' && board[2][0] == board[1][1]
+                && board[2][0] == board[0][2];
     }
 
     private static boolean playerWinsDiagonallyDown(char[][] board) {
-        // TODO
-        // check three locations, if they are not empty and match, someone won
-        return false;
+        return board[0][0] != ' ' && board[0][0] == board[1][1]
+                && board[0][0] == board[2][2];
     }
 
     public static void printBoard(char[][] board) {
