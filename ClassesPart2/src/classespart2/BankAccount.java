@@ -9,7 +9,7 @@ public class BankAccount {
     private String ownerName;
     private String type;
     private int number;
-
+    
     public BankAccount(String type) {
         //this.type = type; // maybe checking if the type is valid
         //balanceInCents = 0;

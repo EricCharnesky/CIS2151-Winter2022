@@ -17,7 +17,7 @@ public class ClassesPart2 {
         
         System.out.println("Bank account number " + checking.getNumber());
         
-        
+        System.out.println("The routing number is: " + BankAccount.ROUTING_NUMBER);
     }
     
 }
