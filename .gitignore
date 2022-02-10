@@ -53,3 +53,6 @@ hs_err_pid*
 /Misc/dist/
 /Lab5/nbproject/private/
 /Lab5/build/
+/AbstractClasses/nbproject/private/
+/AbstractClasses/build/
+/AbstractClasses/dist/
