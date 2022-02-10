@@ -2,20 +2,21 @@ package abstractclasses;
 
 public class SavingsAccount extends BankAccount {
 
-    private double annualInterestRate;
+    // static values don't get set in a constructor
+    // shared among all instances of SavingsAccount
+    private static double annualInterestRate = 0;
 
     public SavingsAccount(String ownerName) {
         super(ownerName);
-        annualInterestRate = 0;
     }
 
-    public double getAnnualInterestRate() {
+    public static double getAnnualInterestRate() {
         return annualInterestRate;
     }
 
-    public void setAnnualInterestRate(double annualInterestRate) {
+    public static void setAnnualInterestRate(double annualInterestRate) {
         if ( annualInterestRate < 1 && annualInterestRate >= 0 ){
-            this.annualInterestRate = annualInterestRate;
+            SavingsAccount.annualInterestRate = annualInterestRate;
         }
         
     }
