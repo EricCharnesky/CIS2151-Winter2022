@@ -1,7 +1,10 @@
 
 package lab6;
 
-public class Item {
+import java.io.Serializable;
+
+// to implement serializable, all of your attributes must ALSO be seralizable
+public class Item implements Serializable{
     private String name;
     private int quantity;
     private double price;
