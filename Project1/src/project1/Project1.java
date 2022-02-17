@@ -6,6 +6,15 @@ public class Project1 {
 
     public static void main(String[] args) {
 
+        Player player = new Player();
+        
+        Space currentSpace = player.getCurrentSpace();
+        Tool tool = currentSpace.getTool();
+        
+        if ( tool != null ){
+            System.out.println("You found a " + tool + " do you want to pick it up?");
+        }
+        
         ArrayList<Space> spaces = new ArrayList<>();
         spaces.add(new Space());
         spaces.add(new DiggableSpace());
