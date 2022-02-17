@@ -11,4 +11,10 @@ public class Space {
             tool = new Tool("Hammer");
         }
     }
+
+    public Tool getTool() {
+        return tool;
+    }
+    
+    
 }

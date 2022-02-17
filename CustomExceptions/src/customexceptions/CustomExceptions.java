@@ -46,7 +46,7 @@ public class CustomExceptions {
             }
         }
         
-        // will auto close the input
+        // will auto close the input - avoids the finallly
         try (BufferedReader input = 
                 new BufferedReader(new FileReader("test.txt"))) {
             System.out.println(input.readLine());
