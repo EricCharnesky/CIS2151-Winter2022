@@ -10,5 +10,11 @@ public class Tool {
     public Tool(String name) {
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
+    
+    
     
 }
