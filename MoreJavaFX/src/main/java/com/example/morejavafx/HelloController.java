@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.*;
 import java.net.URL;
@@ -13,6 +15,9 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
     private Coffee coffee;
+
+    @FXML
+    private ImageView cardImageView;
 
     @FXML
     private Label coffeeLabel;
@@ -29,11 +34,24 @@ public class HelloController implements Initializable {
     @FXML
     private Button upButton;
 
+
+
     // essentially like a constructor, but it runs AFTER all the javafx stuff has been created
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         coffee = new Coffee(250, 50);
         enableAllButtons();
+    }
+
+    @FXML
+    void changeCardButtonClicked(ActionEvent event) {
+        String url = cardImageView.getImage().getUrl();
+        if ( url.endsWith("AofSpades.png") ) {
+            cardImageView.setImage(new Image("AofHearts.jpg"));
+        } else{
+            cardImageView.setImage(new Image("AofSpades.png"));
+        }
+
     }
 
     @FXML

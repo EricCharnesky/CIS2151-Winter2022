@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.morejavafx.HelloController">
@@ -13,5 +15,11 @@
         <Label fx:id="coffeeLabel" layoutX="276.0" layoutY="192.0" />
       <Button layoutX="148.0" layoutY="350.0" mnemonicParsing="false" onAction="#saveButtonClicked" text="Save" />
       <Button layoutX="409.0" layoutY="350.0" mnemonicParsing="false" onAction="#loadButtonClicked" text="Load" />
+      <ImageView fx:id="cardImageView" fitHeight="208.0" fitWidth="153.0" layoutX="440.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@AofSpades.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="486.0" layoutY="254.0" mnemonicParsing="false" onAction="#changeCardButtonClicked" text="change card" />
     </children>
 </AnchorPane>
