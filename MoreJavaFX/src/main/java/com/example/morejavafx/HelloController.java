@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -16,6 +20,11 @@ public class HelloController implements Initializable {
 
     private Coffee coffee;
 
+    private ColorAdjust colorAdjust;
+
+    @FXML
+    private Slider brightnessSlider;
+
     @FXML
     private ImageView cardImageView;
 
@@ -23,7 +32,13 @@ public class HelloController implements Initializable {
     private Label coffeeLabel;
 
     @FXML
+    private Slider contrastSlider;
+
+    @FXML
     private Button downButton;
+
+    @FXML
+    private Slider hueSlider;
 
     @FXML
     private Button leftButton;
@@ -32,20 +47,58 @@ public class HelloController implements Initializable {
     private Button rightButton;
 
     @FXML
+    private Slider saturationSlider;
+
+    @FXML
     private Button upButton;
-
-
 
     // essentially like a constructor, but it runs AFTER all the javafx stuff has been created
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         coffee = new Coffee(250, 50);
         enableAllButtons();
+        colorAdjust = new ColorAdjust();
+
+        Blend blend = new Blend();
+        blend.setMode(BlendMode.ADD);
+        blend.setTopInput(colorAdjust);
+        cardImageView.setEffect(blend);
+
+        // sets it up to run this method when the value changes
+        hueSlider.valueProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    applyColorAdjust();
+                }
+        );
+        saturationSlider.valueProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    applyColorAdjust();
+                }
+        );
+        brightnessSlider.valueProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    applyColorAdjust();
+                }
+        );
+        contrastSlider.valueProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    applyColorAdjust();
+                }
+        );
+
+    }
+
+    private void applyColorAdjust(){
+        colorAdjust.setHue(hueSlider.getValue());
+        colorAdjust.setContrast(contrastSlider.getValue());
+        colorAdjust.setBrightness(brightnessSlider.getValue());
+        colorAdjust.setSaturation(saturationSlider.getValue());
     }
 
     @FXML
     void changeCardButtonClicked(ActionEvent event) {
         String url = cardImageView.getImage().getUrl();
+        // TODO - Fix this
         if ( url.endsWith("AofSpades.png") ) {
             cardImageView.setImage(new Image("AofHearts.jpg"));
         } else{
