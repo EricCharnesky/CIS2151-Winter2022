@@ -22,7 +22,7 @@ public class ThreadExample extends Thread {
         for ( int number = startValue; number < endValue; number++ ){
             if ( isPrime(number) ){
                 // if this isn't synchronized, you can lose updates
-                PrimeCounter.PrimeCount = PrimeCounter.PrimeCount + 1;
+                PrimeCounter.incrementPrimeCount();
                 primeCount++;
             }
         }

@@ -24,8 +24,8 @@ public class HelloController {
 
             ArrayList<ThreadExample> threads = new ArrayList<>();
 
-            for ( int startValue = 1; startValue<1_000_000; startValue += 10_000){
-                ThreadExample primeCounterThread = new ThreadExample(startValue, startValue+9_999);
+            for (int startValue = 1; startValue < 1_000_000; startValue += 10_000) {
+                ThreadExample primeCounterThread = new ThreadExample(startValue, startValue + 9_999);
                 primeCounterThread.start();
                 threads.add(primeCounterThread);
             }
@@ -33,20 +33,44 @@ public class HelloController {
 
             int totalPrimes = 0;
 
-            try{
-                for ( ThreadExample thread : threads){
+            try {
+                for (ThreadExample thread : threads) {
                     thread.join();
                     totalPrimes += thread.getPrimeCount();
                 }
-            } catch ( Exception ex){
+            } catch (Exception ex) {
                 System.out.println(ex);
             }
             leftLabel.setText("Primes: " + totalPrimes);
-            rightLabel.setText("Primes caluclated in static prime counter: "+ PrimeCounter.PrimeCount);
+            rightLabel.setText("Primes calculated in static prime counter: " + PrimeCounter.getPrimeCount());
 
 
         } else if (actionEvent.getSource() == rightButton) {
-            rightLabel.setText("Right button clicked!");
+            ArrayList<Thread> threads = new ArrayList<>();
+            ArrayList<ThreadExampleWithInterface> primeCounters = new ArrayList<>();
+
+            for (int startValue = 1; startValue < 1_000_000; startValue += 10_000) {
+                // Thread can be given something that implements Runnable
+                ThreadExampleWithInterface primeCounter = new ThreadExampleWithInterface(startValue, startValue + 9_999);
+                Thread primeCounterThread = new Thread(primeCounter);
+                primeCounterThread.start();
+                threads.add(primeCounterThread);
+                primeCounters.add(primeCounter);
+            }
+            
+            int totalPrimes = 0;
+
+            try {
+                for (int index = 0; index < threads.size(); index++) {
+                    threads.get(index).join();
+                    totalPrimes += primeCounters.get(index).getPrimeCount();
+                }
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            leftLabel.setText("Primes: " + totalPrimes);
+            rightLabel.setText("Primes calculated in static prime counter: " + PrimeCounter.getPrimeCount());
+
         }
     }
 }
